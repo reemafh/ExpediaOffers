@@ -1,0 +1,120 @@
+<div class="container">
+    <form action="#" #searchForm="ngForm" class="form-horizontal">
+        <div class="row">
+            <div class="col-xs-12" style="margin-top:40px">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><span><i class="fa fa-plane fa-2x"></i></span><strong class="font-large">&nbsp;&nbsp;Search
+                        Offer Deals </strong></div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <div class="col-xs-3">
+                                <label for="destination">Destination</label>
+                                <input class="form-control" #places id="destination" name="destination"
+                                       [(ngModel)]="model.destinationCity" type="text"/>
+                            </div>
+                            <div class="col-xs-3">
+                                <label for="lengthOfStay">Length of Stay</label>
+                                <input class="form-control" id="lengthOfStay" name="lengthOfStay"
+                                       [(ngModel)]="model.lengthOfStay" type="number"/>
+                            </div>
+                            <div class="col-xs-3">
+                                <label for="minStarRating">Min Star Rate</label>
+                                <select [(ngModel)]="model.minStarRating" class="form-control" name="minStarRating">
+                                    <option [value]="null">-- select --</option>
+                                    <option *ngFor="let number of [0,1,2,3,4,5]" [value]="number">{{number}}</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-3">
+                                <label for="maxStarRating">Max Star Rate</label>
+                                <select [(ngModel)]="model.maxStarRating" class="form-control" name="maxStarRating">
+                                    <option [value]="null">-- select --</option>
+                                    <option *ngFor="let number of [0,1,2,3,4,5]" [value]="number">{{number}}</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-xs-3">
+                                <label for="maxTripStartDate">Max Trip Start Date</label>
+                                <input class="form-control" id="maxTripStartDate" name="maxTripStartDate"
+                                       [(ngModel)]="model.maxTripStartDate" type="date"
+                                />
+                            </div>
+                            <div class="col-xs-3">
+                                <label for="minTripStartDate">Min Trip Start Date</label>
+                                <input class="form-control" id="minTripStartDate" name="minTripStartDate"
+                                       [(ngModel)]="model.minTripStartDate" type="date"
+                                />
+                            </div>
+                            <div class="col-xs-3">
+                                <label for="minGuestRating">Min Guest Rating</label>
+                                <select [(ngModel)]="model.minGuestRating" class="form-control" name="minGuestRating">
+                                    <option [value]="null">-- select --</option>
+                                    <option *ngFor="let number of [0,1,2,3,4,5]" [value]="number">{{number}}</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-3">
+                                <label for="maxGuestRating">Max Guest Rating</label>
+                                <select [(ngModel)]="model.maxGuestRating" class="form-control" name="maxGuestRating">
+                                    <option [value]="null">-- select --</option>
+                                    <option *ngFor="let number of [0,1,2,3,4,5]" [value]="number">{{number}}</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-offset-4 col-md-4">
+                                <button id="btnSearch" name="btnSearch" (click)="search()"
+                                        class="btn btn-primary form-control">
+                                    <i class="icon-search4 position-right"></i> Search
+                                </button>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-3" style="min-height:325px;max-height: 325px;"
+                                 *ngFor="let offer of offers.Hotel;">
+                                <div class="hotel-grid background-white border border-grey-1">
+                                    <div class="hotel-img text-center">
+                                        <img src="{{offer.hotelInfo.hotelImageUrl}}" alt="">
+                                    </div>
+                                    <div class="rating">
+                                        <ul class="no-margin-left">
+                                            <li [ngClass]="{'active' : offer.hotelInfo.hotelStarRating > 0 }"></li>
+                                            <li [ngClass]="{'active' : offer.hotelInfo.hotelStarRating >= 2 }"></li>
+                                            <li [ngClass]="{'active' : offer.hotelInfo.hotelStarRating >= 3 }"></li>
+                                            <li [ngClass]="{'active' : offer.hotelInfo.hotelStarRating >= 4 }"></li>
+                                            <li [ngClass]="{'active' : offer.hotelInfo.hotelStarRating >= 5 }"></li>
+                                        </ul>
+                                    </div>
+                                    <div class="padding-20px">
+                                        <h3 style="min-height: 47px;" class="text-uppercase text-medium"><a
+                                                href="{{decodeURI(offer.hotelUrls.hotelInfositeUrl)}}" target="_blank"
+                                                class="text-dark">{{offer.hotelInfo.hotelName}}</a></h3>
+                                        <div style="min-height: 65px;max-height: 65px;">
+                                            <small class="text-uppercase text-extra-small">
+                                                <a href="{{decodeURI(offer.hotelUrls.hotelInfositeUrl)}}" target="_blank" class="text-grey-4"><i
+                                                        class="fa fa-map-marker margin-right-5px"></i>
+                                                    <span class="text-third-color margin-right-5px">{{offer.destination.country}}</span>
+                                                    {{offer.destination.shortName}}</a>
+                                            </small>
+                                            <i class="d-block padding-tb-8px text-grey-2 ">{{offer.hotelInfo.localizedHotelName}}</i>
+                                        </div>
+                                        <div class="margin-bottom-8px text-uppercase text-extra-small">
+                                            <strong class="text-medium text-third-color padding-right-5px font-weight-bold">{{offer.hotelPricingInfo.totalPriceValue}}
+                                                {{offer.hotelPricingInfo.currency}}</strong>Person
+                                        </div>
+                                        <a href="{{decodeURI(offer.hotelUrls.hotelInfositeUrl)}}" target="_blank"
+                                           class="btn-sm btn-lg btn-block background-main-color text-white text-center font-weight-bold text-uppercase rounded-0">Booking
+                                            Now </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
