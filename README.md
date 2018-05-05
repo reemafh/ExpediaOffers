@@ -1,4 +1,4 @@
-# Expedia Coding Exercise
+﻿# Expedia Coding Exercise
 
 ## Development Prerequisites:
 	•	Visual Studio 2017 (15.3.2 or above)
@@ -28,7 +28,7 @@
 	*	All the code exists in the app component (root angular component) including html design and typescript logic (no nested components)
 	*	I’ve added an angular service (ExpediaService) : this service is responsible for the backend call for web api and retrieving the matching deals.
 	*	The service is consumed by the app component using dependency injection ( this is the best practice when we want to integrate with a third party ,moreover, it keeps code clean and modular and prepares my app component for unit testing in the future)
-	*	The html design is done using bootstrap + primeng controls.
-	*	The css exist in app.component.css file
+	*	The html design is done using bootstrap 
+	*	The css exists in app.component.css file
   
-> **Note: Usually I develop angular projects using angular –cli on visual studio code (more lightweight tool and make use of angular-cli commands)**
+> **Note: Usually I develop angular projects using angular –cli on visual studio code (more lightweight tool and makes use of angular-cli commands)**
